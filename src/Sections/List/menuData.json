@@ -1,0 +1,177 @@
+[
+  {
+    "category": "CLASICAS",
+    "items": [
+      { "id": 1, "name": "Mitad y mitad", "price": 2900, "quantity": 0 },
+      { "id": 2, "name": "4 Gustos", "price": 3000, "quantity": 0 },
+      { "id": 3, "name": "2 x Muzzas", "price": 4100, "quantity": 0 },
+      { "id": 4, "name": "Muzzarella", "price": 2300, "quantity": 0 },
+      { "id": 5, "name": "Doble muzzarella", "price": 2600, "quantity": 0 },
+      { "id": 6, "name": "Muzzarella con jamon", "price": 2800, "quantity": 0 },
+      {
+        "id": 7,
+        "name": "Muzzarella con jamon extra",
+        "price": 3100,
+        "quantity": 0
+      },
+      { "id": 8, "name": "Muzzarella con huevo", "price": 2500, "quantity": 0 },
+      {
+        "id": 9,
+        "name": "Muzzarella con choclo",
+        "price": 2700,
+        "quantity": 0
+      },
+      {
+        "id": 10,
+        "name": "Muzzarella con salchichas",
+        "price": 2600,
+        "quantity": 0
+      },
+      {
+        "id": 11,
+        "name": "Muzzarella con papas pay",
+        "price": 2500,
+        "quantity": 0
+      },
+      {
+        "id": 12,
+        "name": "Muzzarella con tomate (con o sin ajo)",
+        "price": 2500,
+        "quantity": 0
+      },
+      {
+        "id": 13,
+        "name": "Calabresa (muzzarella con longaniza)",
+        "price": 2800,
+        "quantity": 0
+      },
+      {
+        "id": 14,
+        "name": "Fugazzeta (muzzarella con cebolla)",
+        "price": 2600,
+        "quantity": 0
+      },
+      {
+        "id": 15,
+        "name": "Morrones (muzzarella with morrones)",
+        "price": 2400,
+        "quantity": 0
+      }
+    ]
+  },
+  {
+    "category": "SUPER CLASICAS",
+    "items": [
+      { "id": 16, "name": "Roquefort", "price": 3200, "quantity": 0 },
+      { "id": 17, "name": "Champiñones", "price": 3200, "quantity": 0 },
+      { "id": 18, "name": "Ananá", "price": 3200, "quantity": 0 }
+    ]
+  },
+  {
+    "category": "ESPECIALES",
+    "items": [
+      { "id": 19, "name": "Mitad y mitad", "price": 3500, "quantity": 0 },
+      { "id": 20, "name": "4 Gustos", "price": 3300, "quantity": 0 },
+      {
+        "id": 21,
+        "name": "Napolitana con jamon",
+        "price": 3400,
+        "quantity": 0
+      },
+      { "id": 22, "name": "Jamon y morrones", "price": 3200, "quantity": 0 },
+      {
+        "id": 23,
+        "name": "Jamon y morrones con huevo duro",
+        "price": 3500,
+        "quantity": 0
+      },
+      { "id": 24, "name": "Jamon con huevo", "price": 3200, "quantity": 0 },
+      {
+        "id": 25,
+        "name": "Salchichas y papas pay",
+        "price": 3200,
+        "quantity": 0
+      },
+      {
+        "id": 26,
+        "name": "Fugazzeta con choclo",
+        "price": 3200,
+        "quantity": 0
+      },
+      { "id": 27, "name": "Calabresa con jamon", "price": 3500, "quantity": 0 },
+      { "id": 28, "name": "Fugazzeta con jamon", "price": 3300, "quantity": 0 },
+      {
+        "id": 29,
+        "name": "Napolitana con huevo",
+        "price": 3400,
+        "quantity": 0
+      },
+      { "id": 30, "name": "Jamon y choclo", "price": 3400, "quantity": 0 },
+      { "id": 31, "name": "Jamon y papas pay", "price": 3400, "quantity": 0 },
+      {
+        "id": 32,
+        "name": "Salchichas con huevo(duro)",
+        "price": 3200,
+        "quantity": 0
+      },
+      {
+        "id": 33,
+        "name": "Napo con jamón y morrones",
+        "price": 3500,
+        "quantity": 0
+      },
+      {
+        "id": 34,
+        "name": "Napo con jamón y huevo",
+        "price": 3500,
+        "quantity": 0
+      }
+    ]
+  },
+  {
+    "category": "SUPER ESPECIALES",
+    "items": [
+      {
+        "id": 35,
+        "name": "Salchichas con papas pay y huevos fritos",
+        "price": 4000,
+        "quantity": 0
+      },
+      {
+        "id": 36,
+        "name": "Pizza cochina(salchichas, huevo frito, y papas fritas)",
+        "price": 4700,
+        "quantity": 0
+      }
+    ]
+  },
+  {
+    "category": "EMPANADAS",
+    "items": [
+      { "id": 37, "name": "Media docena", "price": 4000, "quantity": 0 },
+      { "id": 38, "name": "Una docena", "price": 2200, "quantity": 0 },
+      { "id": 39, "name": "Unidad", "price": 390, "quantity": 0 }
+    ]
+  },
+  {
+    "category": "Papas fritas",
+    "items": [
+      { "id": 40, "name": "Porcion de fritas", "price": 1800, "quantity": 0 },
+      {
+        "id": 41,
+        "name": "Porcion de papas fritas con 2 huevos fritos",
+        "price": 2300,
+        "quantity": 0
+      },
+      { "id": 42, "name": "Salchipapas", "price": 2400, "quantity": 0 }
+    ]
+  },
+  {
+    "category": "HELADO",
+    "items": [
+      { "id": 43, "name": "1 kilo", "price": 2700, "quantity": 0 },
+      { "id": 44, "name": "1/2 kilo", "price": 1450, "quantity": 0 },
+      { "id": 45, "name": "1/4 kilo", "price": 980, "quantity": 0 }
+    ]
+  }
+]
