@@ -26,7 +26,20 @@ const List = () => {
     setCart([]);
   };
 
-  const sendOrder = () => {};
+  const sendOrder = () => {
+    if (cart.length < 1) return;
+
+    // Construct the message with cart items
+    const orderMessage = `Order Details:%0A ${cart
+      .map((item) => `${item.quantity}x ${item.name}`)
+      .join("%0A")}`;
+
+    // Construct the WhatsApp link
+    const whatsappLink = `https://wa.me/+5491124589976?text=${orderMessage}`;
+
+    // Open the link in a new window or redirect to it
+    window.open(whatsappLink, "_blank");
+  };
 
   const total_price = cart.reduce(
     (total, item) => total + item.price * item.quantity,
