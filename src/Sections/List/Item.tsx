@@ -1,6 +1,4 @@
-import { Button, TableCell, TableRow } from "@mui/material";
-import React, { useMemo, useState } from "react";
-import { useCart, ACTIONS } from "./MenuContext.js";
+import { TableCell, TableRow } from "@mui/material";
 import Quantity from "./Quantity.tsx";
 
 const Item = ({ item, updateQuantity, cleanQuantityFunctionRef }) => {
@@ -17,13 +15,11 @@ const Item = ({ item, updateQuantity, cleanQuantityFunctionRef }) => {
       </TableCell>
       <TableCell align="right">{item.price}</TableCell>
       <TableCell align="center">
-        <>
-          <Quantity
-            handleAdd={handleAdd}
-            handleRemove={handleRemove}
-            cleanQuantityFunctionRef={cleanQuantityFunctionRef}
-          />
-        </>
+        <Quantity
+          handleAdd={handleAdd}
+          handleRemove={handleRemove}
+          cleanQuantityFunctionRef={cleanQuantityFunctionRef}
+        />
       </TableCell>
     </TableRow>
   );

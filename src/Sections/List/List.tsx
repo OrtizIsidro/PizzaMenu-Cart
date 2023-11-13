@@ -7,8 +7,7 @@ import Menu from "./Menu";
 const List = () => {
   const [cart, setCart] = useState([]);
 
-  const cleanQuantityFunctionRef = useRef([]);
-  cleanQuantityFunctionRef.current = cart;
+  const cleanQuantityFunctionsRef = useRef([]);
 
   const updateQuantity = (item) =>
     setCart((prev) => {
@@ -19,7 +18,13 @@ const List = () => {
       return newState;
     });
 
-  const cleanCart = () => setCart([]);
+  const cleanCart = () => {
+    if (cart.length < 1) return;
+    cleanQuantityFunctionsRef.current.forEach((cleanQuantity) =>
+      cleanQuantity()
+    );
+    setCart([]);
+  };
 
   const sendOrder = () => {};
 
@@ -27,6 +32,8 @@ const List = () => {
     (total, item) => total + item.price * item.quantity,
     0
   );
+
+  const showButtons = cart.length > 0;
 
   return (
     <>
@@ -36,15 +43,17 @@ const List = () => {
           items={items}
           key={index}
           updateQuantity={updateQuantity}
-          cleanQuantityFunctionRef={cleanQuantityFunctionRef}
+          cleanQuantityFunctionRef={cleanQuantityFunctionsRef}
         />
       ))}
 
-      <ActionButtons
-        total_price={total_price}
-        cleanCart={cleanCart}
-        sendOrder={sendOrder}
-      />
+      {showButtons && (
+        <ActionButtons
+          total_price={total_price}
+          cleanCart={cleanCart}
+          sendOrder={sendOrder}
+        />
+      )}
     </>
   );
 };
