@@ -13,6 +13,7 @@ const Quantity = ({ handleAdd, handleRemove, cleanQuantityFunctionRef }) => {
 
   const decreaseQuantity = () =>
     setQuantity((prev) => {
+      if (prev <= 0) return prev;
       const updated = (prev -= 1);
       handleRemove(updated);
       return updated;

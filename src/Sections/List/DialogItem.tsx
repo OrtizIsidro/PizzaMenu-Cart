@@ -5,40 +5,53 @@ import {
   DialogActions,
   DialogContent,
   DialogTitle,
+  Typography,
 } from "@mui/material";
+import { useState } from "react";
 
-const DialogItem = ({
-  handleConfirmSelection,
-  isDialogOpen,
-  closeDialog,
-  selectedItems,
-  handleItemSelection,
-}) => {
-  console.log(selectedItems);
+const DialogItem = ({ isDialogOpen, closeDialog, items }) => {
+  const [dialogItems, setDialogItems] = useState(items);
+  const confirmSelection = () => {
+    const _items = dialogItems.filter((itemF) => itemF?.selected === true);
+    console.log(_items);
+  };
+  const selectItem = (id) => {
+    setDialogItems((prev) => {
+      const itemIndex = prev.findIndex((item) => item.id === id);
+      const newState = [...prev];
+      newState[itemIndex].selected = !newState[itemIndex].selected;
+      return newState;
+    });
+  };
   return (
     <>
       <Dialog open={isDialogOpen} onClose={closeDialog}>
         <DialogTitle>Select Items</DialogTitle>
         <DialogContent>
           <ul>
-            {selectedItems.map((item, index) => (
-              <li key={item.name + index}>
-                <label>
+            {items.map((item, index) => (
+              <li
+                key={item.name + index}
+                style={{ listStyle: "none", padding: 0 }}
+              >
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                  }}
+                >
                   <Checkbox
                     checked={item.selected || false}
-                    onChange={() => handleItemSelection(item.name)}
+                    onChange={() => selectItem(item.id)}
                   />
-                  {item.name}
-                </label>
+                  <Typography variant="body1">{item.name}</Typography>
+                </div>
               </li>
             ))}
           </ul>
         </DialogContent>
         <DialogActions>
-          <Button
-            onClick={() => handleConfirmSelection(selectedItems[0].name)}
-            color="primary"
-          >
+          <Button onClick={confirmSelection} color="primary">
             Confirm
           </Button>
           <Button onClick={closeDialog} color="secondary">

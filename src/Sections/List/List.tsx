@@ -12,7 +12,7 @@ const List = () => {
   const updateQuantity = (item) =>
     setCart((prev) => {
       const index = prev.findIndex((prevItem) => prevItem.id === item.id);
-      if (index == -1) return [...prev, item];
+      if (index === -1) return [...prev, item];
       const newState = [...prev];
       newState[index] = item;
       return newState;

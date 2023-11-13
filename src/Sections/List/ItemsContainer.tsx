@@ -10,6 +10,7 @@ const ItemsContainer = ({
   items,
   updateQuantity,
   cleanQuantityFunctionRef,
+  openDialog,
 }) => {
   return (
     <TableBody>
@@ -18,6 +19,7 @@ const ItemsContainer = ({
           item={item}
           key={index}
           updateQuantity={updateQuantity}
+          openDialog={openDialog}
           cleanQuantityFunctionRef={cleanQuantityFunctionRef}
         />
       ))}

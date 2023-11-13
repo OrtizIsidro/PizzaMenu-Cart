@@ -4,7 +4,6 @@
     "items": [
       { "id": 1, "name": "Mitad y mitad", "price": 2900, "quantity": 0 },
       { "id": 2, "name": "4 Gustos", "price": 3000, "quantity": 0 },
-      { "id": 3, "name": "2 x Muzzas", "price": 4100, "quantity": 0 },
       { "id": 4, "name": "Muzzarella", "price": 2300, "quantity": 0 },
       { "id": 5, "name": "Doble muzzarella", "price": 2600, "quantity": 0 },
       { "id": 6, "name": "Muzzarella con jamon", "price": 2800, "quantity": 0 },

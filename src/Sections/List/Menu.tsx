@@ -9,7 +9,9 @@ import {
 } from "@mui/material";
 import ResponsiveDiv from "./ResponsiveDiv";
 import ItemsContainer from "./ItemsContainer";
-import React from "react";
+import React, { useState } from "react";
+import DialogItem from "./DialogItem";
+import TableMenu from "./TableMenu";
 
 const Menu = ({
   category,
@@ -17,6 +19,10 @@ const Menu = ({
   updateQuantity,
   cleanQuantityFunctionRef,
 }) => {
+  const [dialog, setDialog] = useState(false);
+  const openDialog = () => setDialog(true);
+  const closeDialog = () => setDialog(false);
+
   return (
     <ResponsiveDiv category={category}>
       <Typography
@@ -28,28 +34,18 @@ const Menu = ({
         {category}
       </Typography>
 
-      <TableContainer component={Paper}>
-        <Table aria-label="simple table">
-          <TableHead>
-            <TableRow>
-              <TableCell align="left">
-                <strong>NOMBRE</strong>
-              </TableCell>
-              <TableCell align="right">
-                <strong>PRECIO</strong>
-              </TableCell>
-              <TableCell align="center">
-                <strong>CANTIDAD</strong>
-              </TableCell>
-            </TableRow>
-          </TableHead>
-          <ItemsContainer
-            items={items}
-            updateQuantity={updateQuantity}
-            cleanQuantityFunctionRef={cleanQuantityFunctionRef}
-          />
-        </Table>
-      </TableContainer>
+      <TableMenu
+        cleanQuantityFunctionRef={cleanQuantityFunctionRef}
+        items={items}
+        openDialog={openDialog}
+        updateQuantity={updateQuantity}
+      />
+
+      <DialogItem
+        closeDialog={closeDialog}
+        isDialogOpen={dialog}
+        items={items}
+      />
     </ResponsiveDiv>
   );
 };
