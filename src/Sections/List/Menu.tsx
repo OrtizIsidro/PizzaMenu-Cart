@@ -1,16 +1,7 @@
-import {
-  Paper,
-  Table,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-  Typography,
-} from "@mui/material";
+import { Button, Typography } from "@mui/material";
 import ResponsiveDiv from "./ResponsiveDiv";
-import ItemsContainer from "./ItemsContainer";
-import React, { useState } from "react";
-import DialogItem from "./DialogItem";
+import React, { useRef, useState } from "react";
+import Dialog from "./Dialog.tsx";
 import TableMenu from "./TableMenu";
 
 const Menu = ({
@@ -19,12 +10,34 @@ const Menu = ({
   updateQuantity,
   cleanQuantityFunctionRef,
 }) => {
+  const priceRef = useRef(0);
   const [dialog, setDialog] = useState(false);
-  const openDialog = () => setDialog(true);
+  const openDialog = (price) => {
+    priceRef.current = price;
+    return setDialog(true);
+  };
+
+  const [addedItems, setAddedItems] = useState([]);
   const closeDialog = () => setDialog(false);
 
+  const confirmSelection = (name) => {
+    console.log("confirm", name);
+    setAddedItems((prev) => {
+      const newAdd = [...prev];
+      const newItem = {
+        name,
+        price: priceRef.current,
+        quantity: 1,
+        id: (Math.random() * 100).toFixed(2),
+      };
+      return [...newAdd, newItem];
+    });
+    closeDialog();
+  };
+
+  const selectItem = () => console.log("select");
   return (
-    <ResponsiveDiv category={category}>
+    <ResponsiveDiv>
       <Typography
         variant={"h3"}
         component={"h1"}
@@ -39,12 +52,14 @@ const Menu = ({
         items={items}
         openDialog={openDialog}
         updateQuantity={updateQuantity}
+        added={addedItems}
       />
 
-      <DialogItem
+      <Dialog
         closeDialog={closeDialog}
         isDialogOpen={dialog}
         items={items}
+        confirmSelection={confirmSelection}
       />
     </ResponsiveDiv>
   );

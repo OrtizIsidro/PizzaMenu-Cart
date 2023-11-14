@@ -1,7 +1,12 @@
 import { Button } from "@mui/material";
 import { useState, useEffect } from "react";
-const Quantity = ({ handleAdd, handleRemove, cleanQuantityFunctionRef }) => {
-  const [quantity, setQuantity] = useState(0);
+const Quantity = ({
+  defaultQuantity,
+  handleAdd,
+  handleRemove,
+  cleanQuantityFunctionRef,
+}) => {
+  const [quantity, setQuantity] = useState(defaultQuantity || 0);
 
   const increaseQuantity = () => {
     setQuantity((prev) => {
@@ -23,8 +28,10 @@ const Quantity = ({ handleAdd, handleRemove, cleanQuantityFunctionRef }) => {
     return setQuantity(0);
   };
   useEffect(() => {
+    if (defaultQuantity) handleAdd(defaultQuantity);
     cleanQuantityFunctionRef.current.push(cleanQuantity);
   }, []);
+
   return (
     <div
       style={{

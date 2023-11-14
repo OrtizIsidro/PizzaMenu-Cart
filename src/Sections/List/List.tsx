@@ -6,7 +6,6 @@ import Menu from "./Menu";
 
 const List = () => {
   const [cart, setCart] = useState([]);
-
   const cleanQuantityFunctionsRef = useRef([]);
 
   const updateQuantity = (item) =>
