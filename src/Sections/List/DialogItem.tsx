@@ -1,6 +1,6 @@
 import { Checkbox, Typography } from "@mui/material";
 import React from "react";
-const DialogItem = ({ item, selectItem }) => {
+const DialogItem = ({ item, selectItem, selected = false }) => {
   return (
     <li style={{ listStyle: "none", padding: 0 }}>
       <div
@@ -11,7 +11,7 @@ const DialogItem = ({ item, selectItem }) => {
       >
         <Checkbox
           id="checkbox"
-          checked={item?.selected || false}
+          checked={selected || false}
           onChange={() => selectItem(item.id)}
         />
         <Typography variant="body1">{item.name}</Typography>
@@ -20,5 +20,5 @@ const DialogItem = ({ item, selectItem }) => {
   );
 };
 export default React.memo(DialogItem, (prev, next) => {
-  return prev.item.selected === next.item.selected;
+  return prev.selected === next.selected;
 });

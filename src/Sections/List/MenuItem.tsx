@@ -1,7 +1,7 @@
 import { Button, TableCell, TableRow, Typography } from "@mui/material";
 import Quantity from "./Quantity.tsx";
 import React from "react";
-const SPECIAL_ITEMS = ["Mitad y mitad", "4 Gustos"];
+import { SPECIAL_ITEMS, AMOUNT_OF_MIXED_ITEMS } from "./helpers.js";
 
 const Item = ({
   item,
@@ -24,7 +24,12 @@ const Item = ({
       <TableCell align="right">{item.price}</TableCell>
       <TableCell align="center">
         {isSpecial ? (
-          <Button variant="outlined" onClick={() => openDialog(item.price)}>
+          <Button
+            variant="outlined"
+            onClick={() =>
+              openDialog(item.price, AMOUNT_OF_MIXED_ITEMS[item.name])
+            }
+          >
             Elegir
           </Button>
         ) : (

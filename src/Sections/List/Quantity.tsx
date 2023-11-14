@@ -1,5 +1,5 @@
-import { Button } from "@mui/material";
 import { useState, useEffect } from "react";
+import QuantityButtons from "./QuantityButtons";
 const Quantity = ({
   defaultQuantity,
   handleAdd,
@@ -38,12 +38,10 @@ const Quantity = ({
         position: "relative",
       }}
     >
-      <Button color="primary" onClick={increaseQuantity}>
-        <strong>+</strong>
-      </Button>
-      <Button color="secondary" onClick={decreaseQuantity}>
-        <strong>-</strong>
-      </Button>
+      <QuantityButtons
+        decreaseQuantity={decreaseQuantity}
+        increaseQuantity={increaseQuantity}
+      />
       <span
         style={{
           position: "absolute",
