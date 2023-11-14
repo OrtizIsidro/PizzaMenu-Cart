@@ -1,7 +1,7 @@
 import { Button, TableCell, TableRow, Typography } from "@mui/material";
 import Quantity from "./Quantity.tsx";
 import React from "react";
-import { SPECIAL_ITEMS, AMOUNT_OF_MIXED_ITEMS } from "./helpers.js";
+import { MIXED_ITEMS, AMOUNT_OF_MIXED_ITEMS } from "./helpers.js";
 
 const Item = ({
   item,
@@ -11,7 +11,7 @@ const Item = ({
 }) => {
   const handleAdd = (quantity) => updateQuantity({ ...item, quantity });
   const handleRemove = (quantity) => updateQuantity({ ...item, quantity });
-  const isSpecial = SPECIAL_ITEMS.includes(item.name);
+  const isSpecial = MIXED_ITEMS.includes(item.name);
 
   return (
     <TableRow

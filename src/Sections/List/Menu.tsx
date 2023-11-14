@@ -3,7 +3,7 @@ import ResponsiveDiv from "./ResponsiveDiv";
 import React, { useEffect, useRef, useState } from "react";
 import Dialog from "./Dialog.tsx";
 import TableMenu from "./TableMenu";
-import { SPECIAL_ITEMS } from "./helpers.js";
+import { MIXED_ITEMS } from "./helpers.js";
 
 const Menu = ({
   category,
@@ -39,7 +39,7 @@ const Menu = ({
   };
 
   const filteredDialogItems = items.filter(
-    (item) => !SPECIAL_ITEMS.includes(item.name)
+    (item) => !MIXED_ITEMS.includes(item.name)
   );
 
   const cleanAddedItems = () => setAddedItems([]);

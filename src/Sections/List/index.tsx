@@ -11,9 +11,12 @@ const List = () => {
 
   const updateQuantity = (item) =>
     setCart((prev) => {
-      const index = prev.findIndex((prevItem) => prevItem.id === item.id);
-      if (index === -1) return [...prev, item];
       const newState = [...prev];
+
+      const index = newState.findIndex((prevItem) => prevItem.id === item.id);
+      if (index === -1) return [...prev, item];
+      if (item.quantity === 0)
+        return newState.filter((F_Item) => F_Item.id !== item.id);
       newState[index] = item;
       return newState;
     });
@@ -28,14 +31,17 @@ const List = () => {
     );
     setCart([]);
   };
-
+  const total_price = cart.reduce(
+    (total, item) => total + item.price * item.quantity,
+    0
+  );
   const sendOrder = () => {
     if (cart.length < 1) return;
 
     // Construct the message with cart items
-    const orderMessage = `Order Details:%0A ${cart
+    const orderMessage = `Detalles del pedido:%0A ${cart
       .map((item) => `${item.quantity}x ${item.name}`)
-      .join("%0A")}`;
+      .join("%0A")} %0A%0ATotal: ${total_price} (sin envio)`;
 
     // Construct the WhatsApp link
     const whatsappLink = `https://wa.me/+5491124589976?text=${orderMessage}`;
@@ -43,11 +49,6 @@ const List = () => {
     // Open the link in a new window or redirect to it
     window.open(whatsappLink, "_blank");
   };
-
-  const total_price = cart.reduce(
-    (total, item) => total + item.price * item.quantity,
-    0
-  );
 
   const showButtons = cart.length > 0;
 
