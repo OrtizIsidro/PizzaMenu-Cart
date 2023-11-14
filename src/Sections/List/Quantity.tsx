@@ -30,7 +30,7 @@ const Quantity = ({
   useEffect(() => {
     if (defaultQuantity) handleAdd(defaultQuantity);
     cleanQuantityFunctionRef.current.push(cleanQuantity);
-  }, []);
+  }, [defaultQuantity, cleanQuantityFunctionRef, handleAdd]);
 
   return (
     <div

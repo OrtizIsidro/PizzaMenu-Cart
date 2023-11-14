@@ -1,3 +1,4 @@
+import React from "react";
 import useWindowWidth from "../../hooks/useWindowWidth";
 
 const ResponsiveDiv = ({ children }) => {

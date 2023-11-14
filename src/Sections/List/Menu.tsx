@@ -1,6 +1,6 @@
-import { Button, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 import ResponsiveDiv from "./ResponsiveDiv";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Dialog from "./Dialog.tsx";
 import TableMenu from "./TableMenu";
 
@@ -9,6 +9,7 @@ const Menu = ({
   items,
   updateQuantity,
   cleanQuantityFunctionRef,
+  cleanAddedItemsFunctionsRef,
 }) => {
   const priceRef = useRef(0);
   const [dialog, setDialog] = useState(false);
@@ -21,21 +22,22 @@ const Menu = ({
   const closeDialog = () => setDialog(false);
 
   const confirmSelection = (name) => {
-    console.log("confirm", name);
     setAddedItems((prev) => {
       const newAdd = [...prev];
       const newItem = {
         name,
         price: priceRef.current,
         quantity: 1,
-        id: (Math.random() * 100).toFixed(2),
+        id: (Math.random() * 100).toFixed(0),
       };
       return [...newAdd, newItem];
     });
     closeDialog();
   };
-
-  const selectItem = () => console.log("select");
+  const cleanAddedItems = () => setAddedItems([]);
+  useEffect(() => {
+    cleanAddedItemsFunctionsRef.current.push(cleanAddedItems);
+  }, [cleanAddedItemsFunctionsRef]);
   return (
     <ResponsiveDiv>
       <Typography

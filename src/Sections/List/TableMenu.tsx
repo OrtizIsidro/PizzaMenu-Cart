@@ -9,7 +9,7 @@ import {
   Typography,
 } from "@mui/material";
 import React from "react";
-import Item from "./Item";
+import Item from "./MenuItem";
 interface MenuItem {
   name: string;
   price: number;
@@ -69,4 +69,6 @@ const TableMenu = ({
     </TableContainer>
   );
 };
-export default TableMenu;
+export default React.memo(TableMenu, (prev, next) => {
+  return prev.added.length === next.added.length;
+});

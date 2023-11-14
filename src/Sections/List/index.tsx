@@ -7,6 +7,7 @@ import Menu from "./Menu";
 const List = () => {
   const [cart, setCart] = useState([]);
   const cleanQuantityFunctionsRef = useRef([]);
+  const cleanAddedItemsFunctionsRef = useRef([]);
 
   const updateQuantity = (item) =>
     setCart((prev) => {
@@ -21,6 +22,9 @@ const List = () => {
     if (cart.length < 1) return;
     cleanQuantityFunctionsRef.current.forEach((cleanQuantity) =>
       cleanQuantity()
+    );
+    cleanAddedItemsFunctionsRef.current.forEach((cleanAddedItems) =>
+      cleanAddedItems()
     );
     setCart([]);
   };
@@ -51,6 +55,7 @@ const List = () => {
     <>
       {Data.map(({ category, items }, index) => (
         <Menu
+          cleanAddedItemsFunctionsRef={cleanAddedItemsFunctionsRef}
           category={category}
           items={items}
           key={index}

@@ -1,4 +1,4 @@
-import List from "./Sections/List/List.tsx";
+import List from "./Sections/List/index.tsx";
 import Spacer from "./Sections/List/Spacer.tsx";
 
 function App() {
