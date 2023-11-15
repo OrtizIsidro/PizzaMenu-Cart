@@ -1,37 +1,9 @@
-import { useState, useEffect } from "react";
 import QuantityButtons from "./QuantityButtons";
 const Quantity = ({
   defaultQuantity,
-  handleAdd,
-  handleRemove,
-  cleanQuantityFunctionRef,
+  increaseItemInCart,
+  decreaseItemInCart,
 }) => {
-  const [quantity, setQuantity] = useState(defaultQuantity || 0);
-
-  const increaseQuantity = () => {
-    setQuantity((prev) => {
-      const updated = (prev += 1);
-      handleAdd(updated);
-      return updated;
-    });
-  };
-
-  const decreaseQuantity = () =>
-    setQuantity((prev) => {
-      if (prev <= 0) return prev;
-      const updated = (prev -= 1);
-      handleRemove(updated);
-      return updated;
-    });
-
-  const cleanQuantity = () => {
-    return setQuantity(0);
-  };
-  useEffect(() => {
-    if (defaultQuantity) handleAdd(defaultQuantity);
-    cleanQuantityFunctionRef.current.push(cleanQuantity);
-  }, [defaultQuantity, cleanQuantityFunctionRef, handleAdd]);
-
   return (
     <div
       style={{
@@ -39,8 +11,8 @@ const Quantity = ({
       }}
     >
       <QuantityButtons
-        decreaseQuantity={decreaseQuantity}
-        increaseQuantity={increaseQuantity}
+        decreaseQuantity={decreaseItemInCart}
+        increaseQuantity={increaseItemInCart}
       />
       <span
         style={{
@@ -50,7 +22,7 @@ const Quantity = ({
           transform: "translate(-50%, -50%)",
         }}
       >
-        {quantity}
+        {defaultQuantity}
       </span>
     </div>
   );

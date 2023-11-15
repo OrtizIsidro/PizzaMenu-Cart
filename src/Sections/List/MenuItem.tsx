@@ -1,27 +1,20 @@
-import { Button, TableCell, TableRow, Typography } from "@mui/material";
+import { Button, TableCell, TableRow } from "@mui/material";
 import Quantity from "./Quantity.tsx";
 import React from "react";
 import { MIXED_ITEMS, AMOUNT_OF_MIXED_ITEMS } from "./helpers.js";
+import TableMenuCell from "./TableMenuCell.tsx";
 
-const Item = ({
-  item,
-  updateQuantity,
-  cleanQuantityFunctionRef,
-  openDialog,
-}) => {
-  const handleAdd = (quantity) => updateQuantity({ ...item, quantity });
-  const handleRemove = (quantity) => updateQuantity({ ...item, quantity });
+const Item = ({ item, increaseItemInCart, decreaseItemInCart, openDialog }) => {
   const isSpecial = MIXED_ITEMS.includes(item.name);
+  const handleIncreaseItemInCart = () => increaseItemInCart(item.id);
+  const handleDecreaseItemInCart = () => decreaseItemInCart(item.id);
 
   return (
     <TableRow
       key={item.name + "h"}
       sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
     >
-      <TableCell component="th" scope="row">
-        <Typography variant="body1">{item.name}</Typography>
-      </TableCell>
-      <TableCell align="right">{item.price}</TableCell>
+      <TableMenuCell name={item.name} price={item.price} />
       <TableCell align="center">
         {isSpecial ? (
           <Button
@@ -35,9 +28,8 @@ const Item = ({
         ) : (
           <Quantity
             defaultQuantity={item.quantity}
-            handleAdd={handleAdd}
-            handleRemove={handleRemove}
-            cleanQuantityFunctionRef={cleanQuantityFunctionRef}
+            increaseItemInCart={handleIncreaseItemInCart}
+            decreaseItemInCart={handleDecreaseItemInCart}
           />
         )}
       </TableCell>
@@ -45,4 +37,7 @@ const Item = ({
   );
 };
 
-export default React.memo(Item, () => true);
+export default React.memo(
+  Item,
+  (prev, next) => prev.item.quantity === next.item.quantity
+);

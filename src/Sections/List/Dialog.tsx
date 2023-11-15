@@ -13,7 +13,7 @@ const Dialog = ({
   closeDialog,
   items,
   confirmSelection,
-  amountOfMixedItems,
+  amountOfMixedItemsToLimitSelection,
 }) => {
   const [selected, setSelected] = useState([]);
 
@@ -23,7 +23,8 @@ const Dialog = ({
     setSelected((prev) => {
       const newState = [...prev];
       if (newState.includes(id)) return newState.filter((F_Id) => F_Id !== id);
-      if (newState.length >= amountOfMixedItems.current) newState.shift();
+      if (newState.length >= amountOfMixedItemsToLimitSelection.current)
+        newState.shift();
       return [...newState, id];
     });
   };
@@ -38,6 +39,11 @@ const Dialog = ({
     cleanSelectedItems();
   };
 
+  const handleCancel = () => {
+    closeDialog();
+    cleanSelectedItems();
+  };
+
   const checkSelected = (item) => {
     const exists = selected.findIndex((id) => id === item.id);
     if (exists === -1) return false;
@@ -45,9 +51,9 @@ const Dialog = ({
   };
   return (
     <>
-      <DialogMaterial open={isDialogOpen} onClose={closeDialog}>
+      <DialogMaterial open={isDialogOpen} onClose={handleCancel}>
         <DialogTitle>
-          You can select {amountOfMixedItems.current} items
+          You can select {amountOfMixedItemsToLimitSelection.current} items
         </DialogTitle>
         <DialogContent>
           <ul>
@@ -65,7 +71,7 @@ const Dialog = ({
           <Button onClick={handleConfirm} color="primary">
             Confirm
           </Button>
-          <Button onClick={closeDialog} color="secondary">
+          <Button onClick={handleCancel} color="secondary">
             Cancel
           </Button>
         </DialogActions>

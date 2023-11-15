@@ -1,15 +1,7 @@
-import {
-  Paper,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-  Typography,
-} from "@mui/material";
+import { Paper, Table, TableBody, TableContainer } from "@mui/material";
 import React from "react";
 import Item from "./MenuItem";
+import TableHeadM from "./TableHeadM";
 interface MenuItem {
   name: string;
   price: number;
@@ -18,50 +10,22 @@ interface MenuItem {
 }
 const TableMenu = ({
   items,
-  updateQuantity,
-  cleanQuantityFunctionRef,
+  increaseItemInCart,
+  decreaseItemInCart,
   openDialog,
-  added,
 }) => {
   return (
     <TableContainer component={Paper}>
       <Table aria-label="simple table">
-        <TableHead>
-          <TableRow>
-            <TableCell align="left">
-              <Typography variant="h6" style={{ fontWeight: "bold" }}>
-                NOMBRE
-              </Typography>
-            </TableCell>
-            <TableCell align="right">
-              <Typography variant="h6" style={{ fontWeight: "bold" }}>
-                PRECIO
-              </Typography>
-            </TableCell>
-            <TableCell align="center">
-              <Typography variant="h6" style={{ fontWeight: "bold" }}>
-                CANTIDAD
-              </Typography>
-            </TableCell>
-          </TableRow>
-        </TableHead>
+        <TableHeadM />
         <TableBody>
-          {added.map((item: MenuItem, index) => (
+          {items.map((item: MenuItem) => (
             <Item
+              increaseItemInCart={increaseItemInCart}
+              decreaseItemInCart={decreaseItemInCart}
               item={item}
-              key={index}
-              updateQuantity={updateQuantity}
+              key={item.id}
               openDialog={openDialog}
-              cleanQuantityFunctionRef={cleanQuantityFunctionRef}
-            />
-          ))}
-          {items.map((item: MenuItem, index) => (
-            <Item
-              item={item}
-              key={index}
-              updateQuantity={updateQuantity}
-              openDialog={openDialog}
-              cleanQuantityFunctionRef={cleanQuantityFunctionRef}
             />
           ))}
         </TableBody>
@@ -69,6 +33,4 @@ const TableMenu = ({
     </TableContainer>
   );
 };
-export default React.memo(TableMenu, (prev, next) => {
-  return prev.added.length === next.added.length;
-});
+export default TableMenu;

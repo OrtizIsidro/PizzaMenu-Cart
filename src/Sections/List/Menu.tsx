@@ -1,78 +1,78 @@
 import { Typography } from "@mui/material";
 import ResponsiveDiv from "./ResponsiveDiv";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import Dialog from "./Dialog.tsx";
 import TableMenu from "./TableMenu";
 import { MIXED_ITEMS } from "./helpers.js";
+import { nanoid } from "nanoid";
+import Category from "./Category.tsx";
 
 const Menu = ({
   category,
   items,
-  updateQuantity,
-  cleanQuantityFunctionRef,
-  cleanAddedItemsFunctionsRef,
+  increaseItemInCart,
+  decreaseItemInCart,
+  addMixedItemToCart,
+  addedItemsIds,
 }) => {
   const [dialog, setDialog] = useState(false);
-  const amountOfMixedItems = useRef(0);
+  const amountOfMixedItemsToLimitSelection = useRef(0);
   const priceRef = useRef(0);
 
   const closeDialog = () => setDialog(false);
   const openDialog = (price, amount) => {
     priceRef.current = price;
-    amountOfMixedItems.current = amount;
+    amountOfMixedItemsToLimitSelection.current = amount;
     return setDialog(true);
   };
 
-  const [addedItems, setAddedItems] = useState([]);
+  const handleIncreaseItemInCart = (id) => increaseItemInCart(category, id);
+  const handleDecreaseItemInCart = (id) => decreaseItemInCart(category, id);
+
   const confirmSelection = (name) => {
-    setAddedItems((prev) => {
-      const newAdd = [...prev];
-      const newItem = {
-        name,
-        price: priceRef.current,
-        quantity: 1,
-        id: (Math.random() * 100).toFixed(0),
-      };
-      return [...newAdd, newItem];
-    });
+    const newItem = {
+      name,
+      id: nanoid(),
+      quantity: 1,
+      price: priceRef.current,
+    };
+    addMixedItemToCart(category, newItem);
     closeDialog();
   };
 
   const filteredDialogItems = items.filter(
-    (item) => !MIXED_ITEMS.includes(item.name)
+    (item) =>
+      !MIXED_ITEMS.includes(item.name) && !addedItemsIds.includes(item.id)
   );
 
-  const cleanAddedItems = () => setAddedItems([]);
-  useEffect(() => {
-    cleanAddedItemsFunctionsRef.current.push(cleanAddedItems);
-  }, [cleanAddedItemsFunctionsRef]);
   return (
     <ResponsiveDiv>
-      <Typography
-        variant={"h3"}
-        component={"h1"}
-        color={"white"}
-        sx={{ padding: "20px 0" }}
-      >
-        {category}
-      </Typography>
+      <Category category={category} />
 
       <TableMenu
-        cleanQuantityFunctionRef={cleanQuantityFunctionRef}
+        increaseItemInCart={handleIncreaseItemInCart}
+        decreaseItemInCart={handleDecreaseItemInCart}
         items={items}
         openDialog={openDialog}
-        updateQuantity={updateQuantity}
-        added={addedItems}
       />
 
       <Dialog
         closeDialog={closeDialog}
         isDialogOpen={dialog}
         items={filteredDialogItems}
-        amountOfMixedItems={amountOfMixedItems}
+        amountOfMixedItemsToLimitSelection={amountOfMixedItemsToLimitSelection}
         confirmSelection={confirmSelection}
       />
     </ResponsiveDiv>
   );
 };
-export default React.memo(Menu, () => true);
+export default React.memo(Menu, (prev, next) => {
+  let shouldNotRender = true;
+  for (let i = 0; i < prev.items.length; i++) {
+    if (prev.items[i].quantity !== next?.items[i]?.quantity) {
+      shouldNotRender = false;
+      break;
+    }
+  }
+  return shouldNotRender;
+});
