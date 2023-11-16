@@ -4,12 +4,12 @@ const TableHeadM = () => {
   return (
     <TableHead>
       <TableRow>
-        <TableCell align="left">
+        <TableCell align="center">
           <Typography variant="h6" style={{ fontWeight: "bold" }}>
             NOMBRE
           </Typography>
         </TableCell>
-        <TableCell align="right">
+        <TableCell align="center">
           <Typography variant="h6" style={{ fontWeight: "bold" }}>
             PRECIO
           </Typography>

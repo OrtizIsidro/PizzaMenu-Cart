@@ -24,16 +24,17 @@ const Dialog = ({
       const newState = [...prev];
       if (newState.includes(id)) return newState.filter((F_Id) => F_Id !== id);
       if (newState.length >= amountOfMixedItemsToLimitSelection.current)
-        newState.shift();
+        newState.pop();
       return [...newState, id];
     });
   };
 
   const handleConfirm = () => {
+    if (selected.length < 1) return handleCancel();
     const name = items
       .filter((item) => selected.includes(item.id))
       .map((item) => item.name)
-      .join(" || ");
+      .join(",%0A");
 
     confirmSelection(name);
     cleanSelectedItems();
@@ -56,7 +57,7 @@ const Dialog = ({
           You can select {amountOfMixedItemsToLimitSelection.current} items
         </DialogTitle>
         <DialogContent>
-          <ul>
+          <ul style={{ margin: 0, padding: 0 }}>
             {items.map((item, index) => (
               <DialogItem
                 selected={checkSelected(item)}

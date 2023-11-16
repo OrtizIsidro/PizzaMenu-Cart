@@ -1,6 +1,6 @@
 import { Typography } from "@mui/material";
 import ResponsiveDiv from "./ResponsiveDiv";
-import React, { useRef, useState } from "react";
+import React, { useMemo, useRef, useState } from "react";
 import Dialog from "./Dialog.tsx";
 import TableMenu from "./TableMenu";
 import { MIXED_ITEMS } from "./helpers.js";
@@ -40,10 +40,12 @@ const Menu = ({
     closeDialog();
   };
 
-  const filteredDialogItems = items.filter(
-    (item) =>
-      !MIXED_ITEMS.includes(item.name) && !addedItemsIds.includes(item.id)
-  );
+  const filteredDialogItems = useMemo(() => {
+    return items.filter(
+      (item) =>
+        !MIXED_ITEMS.includes(item.name) && !addedItemsIds.includes(item.id)
+    );
+  }, []);
 
   return (
     <ResponsiveDiv>
@@ -67,12 +69,10 @@ const Menu = ({
   );
 };
 export default React.memo(Menu, (prev, next) => {
-  let shouldNotRender = true;
   for (let i = 0; i < prev.items.length; i++) {
     if (prev.items[i].quantity !== next?.items[i]?.quantity) {
-      shouldNotRender = false;
-      break;
+      return false;
     }
   }
-  return shouldNotRender;
+  return true;
 });

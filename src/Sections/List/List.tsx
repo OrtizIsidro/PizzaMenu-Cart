@@ -1,15 +1,8 @@
 import React, { useRef, useState, useEffect } from "react";
-import "./styles.css";
 import ActionButtons from "./ActionButtons";
 import Data from "./menuData.json";
 import Menu from "./Menu";
-const getCategory = (item, category, callback) => {
-  if (item.category !== category) return item;
-  return {
-    ...item,
-    items: callback(item.items),
-  };
-};
+import { getCategory } from "./helpers.js";
 
 const List = () => {
   const [data, setData] = useState(Data);
@@ -112,9 +105,11 @@ const List = () => {
     if (cart.current.length < 1) return;
 
     // Construct the message with cart items
-    const orderMessage = `Detalles del pedido:%0A ${cart.current
-      .map((item) => `${item.quantity}x ${item.name}`)
-      .join("%0A")} %0A%0ATotal: ${total_price} (sin envio)`;
+    const orderMessage = `Detalles del pedido:%0A%0A${cart.current
+      .map(
+        (item) => `${item.quantity} x ${item.name}%0A-precio: ${item.price}-`
+      )
+      .join("%0A%0A")} %0A%0ATotal: ${total_price} (sin envio)`;
 
     // Construct the WhatsApp link
     const whatsappLink = `https://wa.me/+5491124589976?text=${orderMessage}`;
