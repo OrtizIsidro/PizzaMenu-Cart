@@ -34,8 +34,11 @@ const List = () => {
         if (menu.category === category) {
           handleCart(mixedItem);
           const copy = [...menu.items];
-          const specials = copy.slice(0, 2);
-          const rest = copy.slice(2, menu.items.length);
+          const SPECIALS_AMOUNT = 2;
+          const specialsLength =
+            SPECIALS_AMOUNT + mixedItemsAddedIds.current.length;
+          const specials = copy.slice(0, specialsLength);
+          const rest = copy.slice(specialsLength, menu.items.length);
           const items = [...specials, mixedItem, ...rest];
           addIdToMixedItemsAdded(mixedItem.id);
           return { ...menu, items };

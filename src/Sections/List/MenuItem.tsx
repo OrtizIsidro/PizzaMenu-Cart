@@ -14,7 +14,11 @@ const Item = ({ item, increaseItemInCart, decreaseItemInCart, openDialog }) => {
       key={item.name + "h"}
       sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
     >
-      <TableMenuCell name={item.name} price={item.price} />
+      <TableMenuCell
+        name={item.name}
+        price={item.price}
+        isSpecial={isSpecial}
+      />
       <TableCell align="center">
         {isSpecial ? (
           <Button

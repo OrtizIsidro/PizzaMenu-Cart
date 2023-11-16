@@ -1,4 +1,3 @@
-import { Typography } from "@mui/material";
 import ResponsiveDiv from "./ResponsiveDiv";
 import React, { useMemo, useRef, useState } from "react";
 import Dialog from "./Dialog.tsx";
